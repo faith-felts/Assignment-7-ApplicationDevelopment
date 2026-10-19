@@ -11,7 +11,7 @@ function MovieDetails({ favorites, favoritesLoading, onToggleFavorite, favorites
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const {
-    currentWatchlist,
+    watchlist,
     addMovieToWatchlist,
     removeMovieFromWatchlist,
   } = useMovies();
@@ -41,7 +41,7 @@ function MovieDetails({ favorites, favoritesLoading, onToggleFavorite, favorites
   }, [movieId]);
 
   const isInWatchlist = movie
-    ? currentWatchlist.movies.some((item) => item.id === movie.id)
+    ? watchlist.some((item) => item.id === movie.id)
     : false;
   const isFavorite = movie
     ? favorites.some((favorite) => favorite.id === movie.id)

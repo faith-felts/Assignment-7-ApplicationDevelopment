@@ -33,7 +33,7 @@ function Header({ onSearch }) {
         <Link to="/" className="app-title">MovieShelf</Link>
         <nav className="nav-links">
           <Link to="/" className="nav-link">Home</Link>
-          <Link to="/watchlist" className="nav-link">Watchlists</Link>
+          <Link to="/watchlist" className="nav-link">Watchlist</Link>
           <Link to="/favorites" className="nav-link">Favorites</Link>
         </nav>
         <form

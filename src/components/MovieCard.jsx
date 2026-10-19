@@ -1,10 +1,25 @@
 import { Link } from 'react-router-dom';
 import { useMovies } from '../contexts/useMovies';
 
-function MovieCard({ movie, isFavorite, favoritesLoading, onToggleFavorite }) {
-  const { currentWatchlist, addMovieToWatchlist, removeMovieFromWatchlist } = useMovies();
+function MovieCard({
+  movie,
+  isFavorite,
+  favoritesLoading,
+  onToggleFavorite,
+  onRemoveFromWatchlist,
+}) {
+  const { watchlist, addMovieToWatchlist, removeMovieFromWatchlist } = useMovies();
   const releaseYear = movie.release_date?.slice(0, 4);
-  const isInWatchlist = currentWatchlist.movies.some((item) => item.id === movie.id);
+  const isInWatchlist = watchlist.some((item) => item.id === movie.id);
+  const handleWatchlistToggle = () => {
+    if (onRemoveFromWatchlist) {
+      onRemoveFromWatchlist(movie.id);
+    } else if (isInWatchlist) {
+      removeMovieFromWatchlist(movie.id);
+    } else {
+      addMovieToWatchlist(movie);
+    }
+  };
 
   return (
     <div className="movie-card">
@@ -44,11 +59,7 @@ function MovieCard({ movie, isFavorite, favoritesLoading, onToggleFavorite }) {
           className={`watchlist-button${isInWatchlist ? ' watchlisted' : ''}`}
           type="button"
           aria-pressed={isInWatchlist}
-          onClick={() => (
-            isInWatchlist
-              ? removeMovieFromWatchlist(movie.id)
-              : addMovieToWatchlist(movie)
-          )}
+          onClick={handleWatchlistToggle}
         >
           {isInWatchlist ? 'Remove from Watchlist' : 'Add to Watchlist'}
         </button>

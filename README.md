@@ -25,6 +25,6 @@ The `.env` file is ignored by Git. Vite exposes `VITE_` variables to browser cod
 
 ## Watchlists and movie details
 
-Use **Watchlists** in the navigation to create, select, and delete named watchlists. Movie cards and movie detail pages add or remove movies from the currently selected list. Watchlists are shared through the Movie Context provider and saved in browser local storage, so they remain available across routes and browser refreshes.
+Use **Watchlist** in the navigation to view your saved movies. Movie cards and movie detail pages add or remove movies from the shared watchlist. Watchlist state is managed by the Movie Context provider and saved in browser local storage, so it remains available across routes and browser refreshes.
 
 Select a movie poster or title to open its details page. Favorites continue to be stored separately from watchlists.
