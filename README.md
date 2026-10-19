@@ -1,6 +1,6 @@
 # MovieShelf
 
-MovieShelf is a React application for browsing popular movies, searching TMDB, and saving favorites in your browser.
+MovieShelf is a React application for browsing popular movies, searching TMDB, viewing movie details, and organizing movies into persistent watchlists and favorites.
 
 ## Getting started
 
@@ -22,3 +22,9 @@ The `.env` file is ignored by Git. Vite exposes `VITE_` variables to browser cod
 - `npm run build` creates a production build.
 - `npm run lint` runs ESLint.
 - `npm run preview` previews the production build.
+
+## Watchlists and movie details
+
+Use **Watchlists** in the navigation to create, select, and delete named watchlists. Movie cards and movie detail pages add or remove movies from the currently selected list. Watchlists are shared through the Movie Context provider and saved in browser local storage, so they remain available across routes and browser refreshes.
+
+Select a movie poster or title to open its details page. Favorites continue to be stored separately from watchlists.

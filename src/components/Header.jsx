@@ -5,7 +5,7 @@ function Header({ onSearch }) {
   const [query, setQuery] = useState('');
   const debounceTimer = useRef(null);
   const { pathname } = useLocation();
-  const searchDisabled = pathname === '/favorites';
+  const searchDisabled = pathname !== '/';
 
   useEffect(() => {
     if (searchDisabled) {
@@ -33,6 +33,7 @@ function Header({ onSearch }) {
         <Link to="/" className="app-title">MovieShelf</Link>
         <nav className="nav-links">
           <Link to="/" className="nav-link">Home</Link>
+          <Link to="/watchlist" className="nav-link">Watchlists</Link>
           <Link to="/favorites" className="nav-link">Favorites</Link>
         </nav>
         <form

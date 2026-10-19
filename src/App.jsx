@@ -3,9 +3,23 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
+import Watchlist from './pages/Watchlist';
+import MovieDetails from './pages/MovieDetails';
+import { MovieProvider } from './contexts/MovieProvider';
+import { useMovies } from './contexts/useMovies';
+import ErrorMessage from './components/ErrorMessage';
 import { getFavoriteMovies, saveFavoriteMovies } from './services/favoritesService';
 import { searchMovies } from './services/movieService';
 import './App.css';
+
+function MovieContextError() {
+  const { error } = useMovies();
+  return error ? (
+    <div className="main-content">
+      <ErrorMessage message={error} />
+    </div>
+  ) : null;
+}
 
 function App() {
   const [searchResults, setSearchResults] = useState(null);
@@ -73,36 +87,61 @@ function App() {
 
   return (
     <Router>
-      <div className="app">
-        <Header onSearch={handleSearch} />
-        <Routes>
-          <Route
-            path="/"
-            element={(
-              <Home
-                searchResults={searchResults}
-                searchLoading={searchLoading}
-                searchError={searchError}
-                favorites={favorites}
-                favoritesLoading={favoritesLoading}
-                favoritesError={favoritesError}
-                onToggleFavorite={handleToggleFavorite}
-              />
-            )}
-          />
-          <Route
-            path="/favorites"
-            element={(
-              <Favorites
-                movies={favorites}
-                loading={favoritesLoading}
-                error={favoritesError}
-                onToggleFavorite={handleToggleFavorite}
-              />
-            )}
-          />
-        </Routes>
-      </div>
+      <MovieProvider>
+        <div className="app">
+          <Header onSearch={handleSearch} />
+          <MovieContextError />
+          <Routes>
+            <Route
+              path="/"
+              element={(
+                <Home
+                  searchResults={searchResults}
+                  searchLoading={searchLoading}
+                  searchError={searchError}
+                  favorites={favorites}
+                  favoritesLoading={favoritesLoading}
+                  favoritesError={favoritesError}
+                  onToggleFavorite={handleToggleFavorite}
+                />
+              )}
+            />
+            <Route
+              path="/favorites"
+              element={(
+                <Favorites
+                  movies={favorites}
+                  loading={favoritesLoading}
+                  error={favoritesError}
+                  onToggleFavorite={handleToggleFavorite}
+                />
+              )}
+            />
+            <Route
+              path="/watchlist"
+              element={(
+                <Watchlist
+                  favorites={favorites}
+                  favoritesLoading={favoritesLoading}
+                  onToggleFavorite={handleToggleFavorite}
+                  favoritesError={favoritesError}
+                />
+              )}
+            />
+            <Route
+              path="/movies/:movieId"
+              element={(
+                <MovieDetails
+                  favorites={favorites}
+                  favoritesLoading={favoritesLoading}
+                  onToggleFavorite={handleToggleFavorite}
+                  favoritesError={favoritesError}
+                />
+              )}
+            />
+          </Routes>
+        </div>
+      </MovieProvider>
     </Router>
   );
 }
