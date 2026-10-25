@@ -33,7 +33,3 @@ export function getPopularMovies({ signal } = {}) {
 export function searchMovies(query, { signal } = {}) {
   return fetchMovies('search/movie', { query }, signal);
 }
-
-export function getMovieDetails(movieId, { signal } = {}) {
-  return fetchMovies(`movie/${movieId}`, {}, signal);
-}

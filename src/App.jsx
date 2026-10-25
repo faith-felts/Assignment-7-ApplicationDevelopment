@@ -4,7 +4,6 @@ import Header from './components/Header';
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
 import Watchlist from './pages/Watchlist';
-import MovieDetails from './pages/MovieDetails';
 import { MovieProvider } from './contexts/MovieProvider';
 import { useMovies } from './contexts/useMovies';
 import ErrorMessage from './components/ErrorMessage';
@@ -121,17 +120,6 @@ function App() {
               path="/watchlist"
               element={(
                 <Watchlist
-                  favorites={favorites}
-                  favoritesLoading={favoritesLoading}
-                  onToggleFavorite={handleToggleFavorite}
-                  favoritesError={favoritesError}
-                />
-              )}
-            />
-            <Route
-              path="/movies/:movieId"
-              element={(
-                <MovieDetails
                   favorites={favorites}
                   favoritesLoading={favoritesLoading}
                   onToggleFavorite={handleToggleFavorite}

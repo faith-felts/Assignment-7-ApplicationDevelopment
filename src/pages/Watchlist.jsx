@@ -22,7 +22,7 @@ function Watchlist({ favorites, favoritesLoading, onToggleFavorite, favoritesErr
         />
       ) : (
         <div className="empty-state">
-          <p>No movies in your watchlist yet. Add movies from Home or a movie details page.</p>
+          <p>No movies in your watchlist yet. Add movies from Home.</p>
         </div>
       )}
     </main>
